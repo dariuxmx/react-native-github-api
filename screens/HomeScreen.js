@@ -1,21 +1,45 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { ScrollView, SafeAreaView, TouchableOpacity, Animated, Easing, StatusBar, Text } from 'react-native';
-import { MainContainer, GenericInput } from '../utils/Styles';
+import { MainContainer, GenericInput, ScreenTitleLabel, SearchContainer } from '../utils/Styles';
+import styled from 'styled-components';
+import CtaButton from '../components/CtaButton';
+import CustomText from '../components/CustomText';
 
 class HomeScreen extends React.Component {
     static navigationOptions = ({ navigation }) => ({
-        title: 'Search Repositories',
+        headerTitle: () => <HeaderLogo source={require('../assets/images/small-logo-github.png')}/>,
         headerStyle: {
-            backgroundColor: "#1B2128",
+            height: 100,
+            shadowColor: 'transparent',
+            backgroundColor: "#F2F2F2",
+            borderBottomWidth: 0,
             fontSize: 17
-        }
+        },
+        headerLeft: null
     })
     render() {
         return (
-            <MainContainer></MainContainer>
+        <MainContainer>
+            <CustomText>
+                <ScreenTitleLabel>GitHubify</ScreenTitleLabel>
+            </CustomText>
+            <SearchContainer>
+                <GenericInput
+                    placeholder="Nombre del repositorio"/>
+                <CtaButton title="Buscar"/>
+            </SearchContainer>
+        </MainContainer>
         )
     }
 }
 
 export default HomeScreen;
+
+const HeaderLogo = styled.Image`
+  width: 50%;
+  height: 50%;
+  resizeMode: center;
+`;
+
+const Title = styled.Text`
+  fontSize: 40px;
+`;
