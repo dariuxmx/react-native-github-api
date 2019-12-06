@@ -72,3 +72,51 @@ export const SearchContainer = styled.View`
   margin-top: 30px;
   padding: 50px 0;
 `;
+
+
+// -> Card
+export const CardContainer = styled.View`
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  background: transparent;
+  margin: 0%;
+  border: 1px solid ${lightColor};
+  padding: 15px 20px;
+`;
+
+export const CardImage = styled.Image`
+  width: 80px;
+  height: 50px;
+  margin-bottom: 10px;
+`;
+
+export const CardTitle = styled.Text`
+  font-size: 17px;
+  font-weight: 500;
+  color: ${darkColor};
+  width: 100%;
+  text-align: left;
+  margin-bottom: 5px;
+`;
+
+export const CardDescription = styled.Text`
+  font-size: 15px;
+  font-weight: 500;
+  color: ${primaryColor};
+  width: 100%;
+  text-align: left;
+  margin-top: 5px;
+`;
+
+export const CardLanguage = styled.Text`
+  font-size: 15px;
+  font-weight: 500;
+  color: ${primaryColor};
+  width: auto;
+  text-align: center;
+  margin-top: 5px;
+  background: red;
+  padding:5px;
+`;

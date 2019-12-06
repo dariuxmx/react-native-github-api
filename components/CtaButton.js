@@ -15,5 +15,5 @@ export default class CtaButton extends React.Component {
 
 CtaButton.protoTypes = {
     title: PropTypes.string.isRequired,
-    nab: PropTypes.func
+    nav: PropTypes.func
 };

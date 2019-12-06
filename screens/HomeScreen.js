@@ -1,10 +1,14 @@
 import React from 'react';
-import { MainContainer, GenericInput, ScreenTitleLabel, SearchContainer } from '../utils/Styles';
+import { MainContainer, GenericInput, ScreenTitleLabel, SearchContainer, TouchableHighlight, Text, FlatList, View } from '../utils/Styles';
 import styled from 'styled-components';
 import CtaButton from '../components/CtaButton';
 import CustomText from '../components/CustomText';
 
 class HomeScreen extends React.Component {
+    constructor(props){
+        super(props);
+    }
+
     static navigationOptions = ({ navigation }) => ({
         headerTitle: () => <HeaderLogo source={require('../assets/images/small-logo-github.png')}/>,
         headerStyle: {
@@ -16,6 +20,7 @@ class HomeScreen extends React.Component {
         },
         headerLeft: null
     })
+
     render() {
         return (
         <MainContainer>
@@ -23,8 +28,7 @@ class HomeScreen extends React.Component {
                 <ScreenTitleLabel>GitHubify</ScreenTitleLabel>
             </CustomText>
             <SearchContainer>
-                <GenericInput
-                    placeholder="Nombre del repositorio"/>
+                <GenericInput placeholder="Nombre del repositorio"/>
                 <CtaButton title="Buscar" nav={() => this.props.navigation.push('ListReposScreen')} />
             </SearchContainer>
         </MainContainer>
