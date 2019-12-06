@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text, View, ActivityIndicator, StyleSheet } from 'react-native';
 import * as Font from 'expo-font';
-import styled from 'styled-components';
 
 export default class CustomText extends React.Component {
     constructor(props) {

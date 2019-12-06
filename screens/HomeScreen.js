@@ -25,7 +25,7 @@ class HomeScreen extends React.Component {
             <SearchContainer>
                 <GenericInput
                     placeholder="Nombre del repositorio"/>
-                <CtaButton title="Buscar"/>
+                <CtaButton title="Buscar" nav={() => this.props.navigation.push('ListReposScreen')} />
             </SearchContainer>
         </MainContainer>
         )

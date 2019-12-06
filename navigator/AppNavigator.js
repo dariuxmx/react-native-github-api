@@ -1,15 +1,17 @@
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import LoadingScreen from '../screens/Loading';
-import HomeScreen from '../screens/HomeScreen';
+import Loading from '../screens/Loading';
+import Home from '../screens/HomeScreen';
+import ListRepos from '../screens/ListRepos';
 
 const stackNavigation = createStackNavigator (
     {
-        Loading: LoadingScreen,
-        Home: HomeScreen
+        LoadingScreen: Loading,
+        HomeScreen: Home,
+        ListReposScreen: ListRepos
     },
     {
-        initialRouteName: "Loading"
+        initialRouteName: "LoadingScreen"
     },
     {
         navigationOptions: {
