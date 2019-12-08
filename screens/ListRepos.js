@@ -6,12 +6,26 @@ import Repo from '../components/Repo';
 class ListRepos extends React.Component {
     constructor(props){
         super(props);
-        this.state ={ isLoading: true}
+        this.state = {
+            isLoading: true,
+            query: props.navigation.state.params.query
+          };
     }
+
+    static navigationOptions = ({ navigation }) => ({
+        headerTitle: 'Results',
+        headerStyle: {
+            height: 100,
+            shadowColor: 'transparent',
+            backgroundColor: "#F2F2F2",
+            borderBottomWidth: 0,
+            fontSize: 17
+        },
+    })
 
     async componentDidMount(){
         try {
-            const response = await fetch('https://api.github.com/search/repositories?sort=stars&order=desc&q=react+native');
+            const response = await fetch('https://api.github.com/search/repositories?sort=stars&order=desc&q=' + this.state.query);
             const responseJson = await response.json();
             this.setState({
                 isLoading: false,
@@ -22,7 +36,7 @@ class ListRepos extends React.Component {
         catch (error) {
             console.error(error);
         }
-      }
+    }
 
 
     render(){

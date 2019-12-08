@@ -7,6 +7,9 @@ import CustomText from '../components/CustomText';
 class HomeScreen extends React.Component {
     constructor(props){
         super(props);
+        this.state = {
+            query: ""
+        }
     }
 
     static navigationOptions = ({ navigation }) => ({
@@ -28,8 +31,13 @@ class HomeScreen extends React.Component {
                 <ScreenTitleLabel>GitHubify</ScreenTitleLabel>
             </CustomText>
             <SearchContainer>
-                <GenericInput placeholder="Nombre del repositorio"/>
-                <CtaButton title="Buscar" nav={() => this.props.navigation.push('ListReposScreen')} />
+                <GenericInput placeholder="Nombre del repositorio" onChangeText={query =>
+                    this.setState({ query })
+                }
+                value={this.state.query} />
+                <CtaButton title="Buscar" nav={() => this.props.navigation.push('ListReposScreen', {
+                    query: this.state.query
+                })} />
             </SearchContainer>
         </MainContainer>
         )
@@ -42,8 +50,4 @@ const HeaderLogo = styled.Image`
   width: 50%;
   height: 50%;
   resizeMode: center;
-`;
-
-const Title = styled.Text`
-  fontSize: 40px;
 `;
