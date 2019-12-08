@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 // Colors
 export const primaryColor = "#B0D400";
-export const secondaryColor = "#000";
+export const secondaryColor = "#6D7278";
 export const primaryBackgroundColor = "#fafafa";
 export const inputTextBackgroundColor = "#fff";
 export const lightColor = "#F2F2F2";
@@ -71,4 +71,53 @@ export const SearchContainer = styled.View`
   margin-bottom: 0px;
   margin-top: 30px;
   padding: 50px 0;
+`;
+
+
+// -> Card
+export const CardContainer = styled.View`
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  background: white;
+  margin-bottom: 22px;
+  padding: 15px 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+`;
+
+export const CardImage = styled.Image`
+  width: 80px;
+  height: 50px;
+  margin-bottom: 10px;
+`;
+
+export const CardTitle = styled.Text`
+  font-size: 17px;
+  font-weight: 500;
+  color: ${darkColor};
+  width: 100%;
+  text-align: left;
+  margin-bottom: 5px;
+`;
+
+export const CardDescription = styled.Text`
+  font-size: 15px;
+  font-weight: 500;
+  color: ${secondaryColor};
+  width: 100%;
+  text-align: left;
+  margin-top: 5px;
+`;
+
+export const CardLanguage = styled.Text`
+  font-size: 15px;
+  font-weight: 500;
+  color: white;
+  background: ${primaryColor};
+  border-radius: 3px;
+  width: auto;
+  text-align: left;
+  margin-top: 10px;
+  padding:5px;
 `;

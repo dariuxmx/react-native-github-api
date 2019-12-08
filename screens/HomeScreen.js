@@ -1,10 +1,17 @@
 import React from 'react';
-import { MainContainer, GenericInput, ScreenTitleLabel, SearchContainer } from '../utils/Styles';
+import { MainContainer, GenericInput, ScreenTitleLabel, SearchContainer, TouchableHighlight, Text, FlatList, View } from '../utils/Styles';
 import styled from 'styled-components';
 import CtaButton from '../components/CtaButton';
 import CustomText from '../components/CustomText';
 
 class HomeScreen extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            query: ""
+        }
+    }
+
     static navigationOptions = ({ navigation }) => ({
         headerTitle: () => <HeaderLogo source={require('../assets/images/small-logo-github.png')}/>,
         headerStyle: {
@@ -16,6 +23,7 @@ class HomeScreen extends React.Component {
         },
         headerLeft: null
     })
+
     render() {
         return (
         <MainContainer>
@@ -23,9 +31,13 @@ class HomeScreen extends React.Component {
                 <ScreenTitleLabel>GitHubify</ScreenTitleLabel>
             </CustomText>
             <SearchContainer>
-                <GenericInput
-                    placeholder="Nombre del repositorio"/>
-                <CtaButton title="Buscar"/>
+                <GenericInput placeholder="Nombre del repositorio" onChangeText={query =>
+                    this.setState({ query })
+                }
+                value={this.state.query} />
+                <CtaButton title="Buscar" nav={() => this.props.navigation.push('ListReposScreen', {
+                    query: this.state.query
+                })} />
             </SearchContainer>
         </MainContainer>
         )
@@ -38,8 +50,4 @@ const HeaderLogo = styled.Image`
   width: 50%;
   height: 50%;
   resizeMode: center;
-`;
-
-const Title = styled.Text`
-  fontSize: 40px;
 `;

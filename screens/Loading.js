@@ -9,7 +9,7 @@ export default class Loading extends React.Component {
     };
 
     componentDidMount() {
-        this.props.navigation.navigate("Home");
+        this.props.navigation.navigate("HomeScreen");
     }
 
     render(){
