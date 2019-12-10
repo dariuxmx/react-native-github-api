@@ -7,7 +7,7 @@ class ModalView extends React.Component {
         super(props);
         this.state = {
             modalVisible: props.modalVisible,
-            repoDetails: props.repoDetails,
+            avatar: props.avatar_url,
             id: null
         }
     };
@@ -15,6 +15,7 @@ class ModalView extends React.Component {
     componentWillReceiveProps(nextProps) {
         this.setState ({
             modalVisible: nextProps.modalVisible,
+            avatar: nextProps.avatar_url,
             id: nextProps.id
         })
     }
@@ -27,7 +28,8 @@ class ModalView extends React.Component {
             visible={ this.state.modalVisible }
             onRequestClose={() => { this.props.setModalVisible(false) }}>
                 <Container>
-        <Text>{ this.state.id } {this.props.repoDetails}</Text>
+                    <Image source={{ url: this.state.avatar_url }} />
+                <Text>{ this.state.id }</Text>
                         <TouchableHighlight
                             onPress = {() => { this.props.setModalVisible(false) }}
                         >

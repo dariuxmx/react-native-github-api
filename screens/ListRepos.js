@@ -26,7 +26,6 @@ class ListRepos extends React.Component {
             fontSize: 17
         },
     })
-
     
     // Parse api
     async componentDidMount(){
@@ -44,21 +43,31 @@ class ListRepos extends React.Component {
         }
     }
 
-    _onPressItem(id) {
+    _onPressItem(id, item) {
         this.setState({
             modalVisible: true,
-            id: id
+            id: id,
+            repoDetails: item,
+            avatar: item.avatar_url
         });
     }
 
     _renderRepoItem = ({item}) => {
         return(
-            <TouchableOpacity
-                id={ item.name }
-                onPress={() => this._onPressItem(item.name)}
-                >
-                    <Repo name={item.full_name} description={item.description} language={item.language}/>
-            </TouchableOpacity>
+            this.state.dataSource.map((repoArray, index) => (
+               <TouchableOpacity
+                    key={`repoArray-${index}`}
+                    id={ repoArray.name }
+                    onPress={() => this._onPressItem((repoArray.name), item)}
+                    >
+                        <Repo 
+                            name={repoArray.full_name}
+                            description={repoArray.description}
+                            language={repoArray.language}
+                        />
+                </TouchableOpacity>
+                )
+            )
         )
     }
 
@@ -70,7 +79,9 @@ class ListRepos extends React.Component {
             <View>
                 <ModalView
                     id = { this.state.id }
+                    repoDetails = { this.state.repoDetails }
                     modalVisible = { this.state.modalVisible }
+                    repoAvatar = {this.state.repoAvatar }
                     setModalVisible = { (vis) => { this.setState({
                         modalVisible: vis
                       })
