@@ -1,13 +1,17 @@
 import React from 'react';
-import ApiService from '../components/ApiService';
-import { Text, View, FlatList } from 'react-native';
+import { FlatList, ActivityIndicator, Alert, StyleSheet, View, Text, Modal, Button } from 'react-native';
 import Repo from '../components/Repo';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import CtaButton from '../components/CtaButton';
+import ModalView from './Modal';
 
 class ListRepos extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             isLoading: true,
+            modalVisible: false,
+            id: null,
             query: props.navigation.state.params.query
           };
     }
@@ -23,6 +27,8 @@ class ListRepos extends React.Component {
         },
     })
 
+    
+    // Parse api
     async componentDidMount(){
         try {
             const response = await fetch('https://api.github.com/search/repositories?sort=stars&order=desc&q=' + this.state.query);
@@ -38,16 +44,44 @@ class ListRepos extends React.Component {
         }
     }
 
+    _onPressItem(id) {
+        this.setState({
+            modalVisible: true,
+            id: id
+        });
+    }
+
+    _renderRepoItem = ({item}) => {
+        return(
+            <TouchableOpacity
+                id={ item.name }
+                onPress={() => this._onPressItem(item.name)}
+                >
+                    <Repo name={item.full_name} description={item.description} language={item.language}/>
+            </TouchableOpacity>
+        )
+    }
 
     render(){
+        if (this.state.isLoading){
+            return <ActivityIndicator />
+        }
         return(
-            <FlatList
-                data={this.state.dataSource}
-                renderItem={({item}) => (
-                    <Repo name={item.full_name} description={item.description} language={item.language}/>
-                )}
-                keyExtractor={({id}, index) => id}
-            />
+            <View>
+                <ModalView
+                    id = { this.state.id }
+                    modalVisible = { this.state.modalVisible }
+                    setModalVisible = { (vis) => { this.setState({
+                        modalVisible: vis
+                      })
+                    }}
+                />
+                <FlatList
+                    data={this.state.dataSource}
+                    renderItem={this._renderRepoItem}
+                    keyExtractor={item => item.full_name}
+                />
+            </View>
         );
     }
 }
