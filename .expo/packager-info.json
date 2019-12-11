@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 76748,
-  "expoServerNgrokUrl": "https://nn-pri.dariuxmx.githubapi.exp.direct",
-  "packagerNgrokUrl": "https://packager.nn-pri.dariuxmx.githubapi.exp.direct",
-  "ngrokPid": 76758
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }

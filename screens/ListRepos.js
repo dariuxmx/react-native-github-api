@@ -1,8 +1,7 @@
 import React from 'react';
-import { FlatList, ActivityIndicator, Alert, StyleSheet, View, Text, Modal, Button } from 'react-native';
+import { FlatList, ActivityIndicator, View } from 'react-native';
 import Repo from '../components/Repo';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import CtaButton from '../components/CtaButton';
 import ModalView from './Modal';
 
 class ListRepos extends React.Component {
@@ -11,13 +10,14 @@ class ListRepos extends React.Component {
         this.state = {
             isLoading: true,
             modalVisible: false,
+            avatar: '',
             id: null,
             query: props.navigation.state.params.query
           };
     }
 
     static navigationOptions = ({ navigation }) => ({
-        headerTitle: 'Results',
+        headerTitle: 'Resultados',
         headerStyle: {
             height: 100,
             shadowColor: 'transparent',
@@ -27,7 +27,8 @@ class ListRepos extends React.Component {
         },
     })
     
-    // Parse api
+    // Parse Api: /search/repositories
+    // Url: https://developer.github.com/v3/search/
     async componentDidMount(){
         try {
             const response = await fetch('https://api.github.com/search/repositories?sort=stars&order=desc&q=' + this.state.query);
@@ -48,7 +49,7 @@ class ListRepos extends React.Component {
             modalVisible: true,
             id: id,
             repoDetails: item,
-            avatar: item.avatar_url
+            avatar: id.avatar_url
         });
     }
 
@@ -62,6 +63,7 @@ class ListRepos extends React.Component {
                     >
                         <Repo 
                             name={repoArray.full_name}
+                            thumb={repoArray.owner.avatar_url}
                             description={repoArray.description}
                             language={repoArray.language}
                         />
@@ -81,7 +83,7 @@ class ListRepos extends React.Component {
                     id = { this.state.id }
                     repoDetails = { this.state.repoDetails }
                     modalVisible = { this.state.modalVisible }
-                    repoAvatar = {this.state.repoAvatar }
+                    avatar = { this.state.avatar }
                     setModalVisible = { (vis) => { this.setState({
                         modalVisible: vis
                       })

@@ -38,7 +38,7 @@ class HomeScreen extends React.Component {
                 value={this.state.query} />
                 <CtaButton title="Buscar" nav={() => {
                     if(this.state.query == ''){
-                        Alert.alert("Githubfy", "Por favor escribe el nombre del repositorio a buscar", [
+                        Alert.alert("Githubify", "Por favor escribe el nombre del repositorio a buscar", [
                             { text: "Aceptar" }
                         ]);
                     }else {

@@ -1,18 +1,43 @@
 import React from 'react';
-import { Modal, Text, TouchableHighlight } from 'react-native';
+import { Modal, Text, TouchableHighlight, FlatList, ActivityIndicator } from 'react-native';
 import styled from "styled-components";
+import CommitCell from '../components/CommitCell';
+import CtaButton from '../components/CtaButton';
 
 class ModalView extends React.Component {
+
     constructor(props){
         super(props);
         this.state = {
+            isLoading: true,
+            repoName: 'airbnb/lottie-ios',
             modalVisible: props.modalVisible,
             avatar: props.avatar_url,
-            id: null
+            id: null,
+            date: new Date()
         }
     };
 
+    // Parse Api: /search/commits
+    // Url: https://developer.github.com/v3/search/
     componentWillReceiveProps(nextProps) {
+        fetch('https://api.github.com/search/commits?sort=author-date&q=' + this.state.reponame + '/commits', {
+            method: 'GET',
+            headers: {
+                Accept: 'application/vnd.github.cloak-preview'
+            }
+        })
+        .then(response => response.json())
+        .then(response => {
+            this.setState({
+                responseData: response.items,
+                isLoading: false
+            });
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
         this.setState ({
             modalVisible: nextProps.modalVisible,
             avatar: nextProps.avatar_url,
@@ -20,108 +45,67 @@ class ModalView extends React.Component {
         })
     }
 
-    render(){
+    _renderCommitItem = ({item}) => {
         return(
-            <Modal
-            animationType="slide"
-            transparent={ false }
-            visible={ this.state.modalVisible }
-            onRequestClose={() => { this.props.setModalVisible(false) }}>
-                <Container>
-                    <Image source={{ url: this.state.avatar_url }} />
-                <Text>{ this.state.id }</Text>
+            this.state.responseData.map((repoArray, index) => (
+                    <CommitCell 
+                        key={index}
+                        date={this.state.date.toLocaleDateString()}
+                        name={repoArray.commit.committer.name}
+                        author={repoArray.commit.author.name}
+                        commitMessage={repoArray.commit.message}
+                    />
+                )
+            )
+        )
+    }
+
+    render(){
+        if (this.state.isLoading){
+            return <ActivityIndicator />
+        }
+        return(
+                <Modal
+                animationType="slide"
+                transparent={ true }
+                visible={ this.state.modalVisible }
+                onRequestClose={() => { this.props.setModalVisible(false) }}>
+                    <Container>
+                        <Image source={{uri: this.state.avatar}}/>
+                        <Text>{this.state.avatar}</Text>
+                        <FlatList
+                            data={this.state.responseData}
+                            renderItem={this._renderCommitItem}
+                            keyExtractor={item => item.sha}
+                        />
                         <TouchableHighlight
                             onPress = {() => { this.props.setModalVisible(false) }}
                         >
-                            <Text>Hide Modal</Text>
+                            <CtaButton title="Cerrar" />
                         </TouchableHighlight>
-                    {/* <Cover>
-                    <Image source={props.image} />
-                    <Title>{props.title}</Title>
-                    </Cover>
-                    <Content>
-                    <Logo source={props.logo} />
-                    <Wrapper>
-                        <Caption>{props.caption}</Caption>
-                        <Subtitle>{props.subtitle}</Subtitle>
-                        <Text>{ this.state.id }</Text>
-                        <TouchableHighlight
-                            onPress = {() => { this.props.setModalVisible(false) }}
-                        >
-                            <Text>Hide Modal</Text>
-                        </TouchableHighlight>
-                    </Wrapper>
-                    </Content> */}
-                </Container>
-        </Modal>
+                    </Container>
+                </Modal>
         );
     }
 }
 
 export default ModalView;
 
-
-const Wrapper = styled.View`
-  margin-left: 10px;
-`;
-
-const Content = styled.View`
-  flex-direction: row;
-  padding-left: 20px;
-  align-items: center;
-  height: 80px;
-`;
-
-const Caption = styled.Text`
-  color: #3c4560;
-  font-size: 20px;
-  font-weight: 600;
-`;
-
-const Subtitle = styled.Text`
-  color: #b8bece;
-  font-weight: 600;
-  font-size: 15px;
-  text-transform: uppercase;
-  margin-top: 4px;
-`;
-
-const Logo = styled.Image`
-  width: 44px;
-  height: 44px;
-`;
-
-const Cover = styled.View`
-  width: 100%;
-  height: 200px;
-  border-top-left-radius: 14px;
-  border-top-right-radius: 14px;
-  overflow: hidden;
-`;
-
-const Image = styled.Image`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-`;
-
-const Title = styled.Text`
-  color: white;
-  font-size: 24px;
-  font-weight: bold;
-  width: 170px;
-  margin-top: 20px;
-  margin-left: 20px;
-`;
-
 const Container = styled.View`
   background-color: white;
-  width: 315px;
-  height: 280px;
+  width: 86%;
+  height: 86%;
   border-radius: 14px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-  margin-left: 20px;
-  margin-top: 20px;
+  margin: 7%;
+  flex: 1;
+`;
+
+const Image = styled.View`
+    width: 100%;
+    height: 200px;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    overflow: hidden;
+    resize-mode: cover;
 `;
