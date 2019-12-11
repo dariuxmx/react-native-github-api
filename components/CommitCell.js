@@ -29,6 +29,6 @@ CommitCell.propTypes = {
     date: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired,
-    commitMessage: PropTypes.string.isRequired,
+    commitMessage: PropTypes.string,
   };
   

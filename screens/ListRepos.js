@@ -57,8 +57,8 @@ class ListRepos extends React.Component {
         return(
             this.state.dataSource.map((repoArray, index) => (
                <TouchableOpacity
-                    key={`repoArray-${index}`}
-                    id={ repoArray.name }
+                    key={index}
+                    id={repoArray.name}
                     onPress={() => this._onPressItem((repoArray.name), item)}
                     >
                         <Repo 
