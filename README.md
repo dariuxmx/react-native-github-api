@@ -11,5 +11,4 @@ Running the app:
 🍎 [a Download Expo client for iOS from the App Store](https://apps.apple.com/us/app/expo-client/id982107779)
 
 
-Demo
 ![App running in iOS](http://g.recordit.co/4P3eKMiCqq.gif)
