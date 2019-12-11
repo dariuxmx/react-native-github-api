@@ -28,7 +28,7 @@ export default Repo;
 
 Repo.propTypes = {
     name: PropTypes.string.isRequired,
-    thumb: PropTypes.string.isRequired,
+    thumb: PropTypes.string,
     description: PropTypes.string.isRequired,
     language: PropTypes.string
   };

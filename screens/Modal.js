@@ -45,15 +45,15 @@ class ModalView extends React.Component {
         })
     }
 
-    _renderCommitItem = ({item}) => {
+    _renderCommitItem = (item) => {
         return(
-            this.state.responseData.map((repoArray, index) => (
+            this.state.responseData.map((repoDetails, index) => (
                     <CommitCell 
                         key={index}
                         date={this.state.date.toLocaleDateString()}
-                        name={repoArray.commit.committer.name}
-                        author={repoArray.commit.author.name}
-                        commitMessage={repoArray.commit.message}
+                        name={repoDetails.commit.committer.name}
+                        author={repoDetails.commit.author.name}
+                        commitMessage={repoDetails.repository.full_name}
                     />
                 )
             )
@@ -71,12 +71,12 @@ class ModalView extends React.Component {
                 visible={ this.state.modalVisible }
                 onRequestClose={() => { this.props.setModalVisible(false) }}>
                     <Container>
-                        <Image source={{uri: this.state.avatar}}/>
+                        {/* <Image source={{uri: this.state.avatar}}/> */}
                         <Text>{this.state.avatar}</Text>
                         <FlatList
                             data={this.state.responseData}
                             renderItem={this._renderCommitItem}
-                            keyExtractor={item => item.sha}
+                            keyExtractor={(item, index) => index.toString()}
                         />
                         <TouchableHighlight
                             onPress = {() => { this.props.setModalVisible(false) }}
