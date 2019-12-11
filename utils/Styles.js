@@ -87,27 +87,32 @@ export const CardContainer = styled.View`
 `;
 
 export const CardImage = styled.Image`
-  width: 80px;
-  height: 50px;
-  margin-bottom: 10px;
+  width: 15%;
+  height: 60%;
+  position: absolute;
+  left: 5%;
 `;
 
 export const CardTitle = styled.Text`
   font-size: 17px;
   font-weight: 500;
   color: ${darkColor};
-  width: 100%;
+  width: 70%;
   text-align: left;
   margin-bottom: 5px;
+  position: relative;
+  left: 10%;
 `;
 
 export const CardDescription = styled.Text`
   font-size: 15px;
   font-weight: 500;
   color: ${secondaryColor};
-  width: 100%;
+  width: 70%;
   text-align: left;
   margin-top: 5px;
+  position: relative;
+  left: 10%;
 `;
 
 export const CardLanguage = styled.Text`
@@ -121,3 +126,60 @@ export const CardLanguage = styled.Text`
   margin-top: 10px;
   padding:5px;
 `;
+
+// Commit cell
+export const CellContainer = styled.View`
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  background: white;
+  margin-bottom: -1px;
+  padding: 15px 20px;
+  border: 1px solid ${lightColor};
+`;
+
+export const RepoName = styled.Text`
+  font-size: 17px;
+  font-weight: 600;
+  color: ${darkColor};
+  width: 90%;
+  text-align: left;
+  margin-bottom: 5px;
+  position: relative;
+  left: 5px;
+`;
+
+export const CommitAuthor = styled.Text`
+  font-size: 15px;
+  font-weight: 500;
+  color: ${darkColor};
+  width: 90%;
+  text-align: left;
+  margin-bottom: 5px;
+  position: relative;
+  left: 5px;
+`;
+
+export const DateUpdated = styled.Text`
+  font-size: 15px;
+  font-weight: 500;
+  color: ${secondaryColor};
+  width: 90%;
+  text-align: left;
+  margin-bottom: 5px;
+  position: relative;
+  left: 5px;
+`;
+
+export const CommitMessage = styled.Text`
+  font-size: 15px;
+  font-weight: 500;
+  color: ${darkColor};
+  width: 90%;
+  text-align: left;
+  margin-bottom: 5px;
+  position: relative;
+  left: 5px;
+`;
+

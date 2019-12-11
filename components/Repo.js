@@ -1,20 +1,35 @@
 import React from 'react';
+import { CardContainer, CardDescription, CardTitle, CardLanguage, CardImage } from "../utils/Styles";
+import { Image } from 'react-native';
 import PropTypes from 'prop-types';
-import { CardContainer, CardDescription, CardTitle, CardLanguage } from "../utils/Styles";
 
-export default class Repo extends React.Component {
+class Repo extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            isModalVisible: false
+        }
+    };
+
     render(){
-        const { name, description, language } = this.props;
-        return (
-        <CardContainer>
-            <CardTitle>{name}</CardTitle>
-            <CardDescription>{description}</CardDescription>
-        <CardLanguage>{language}</CardLanguage>
-        </CardContainer>
+        const { name, thumb, description, language } = this.props;
+        return(
+                <CardContainer>
+                    <CardTitle>{name}</CardTitle>
+                        <CardImage source={{uri:thumb}}/>
+                        <CardDescription>{description}</CardDescription>
+                    <CardLanguage>{language}</CardLanguage>
+                </CardContainer>
         );
     }
 }
 
-Repo.protoTypes = {
+export default Repo;
+
+Repo.propTypes = {
     name: PropTypes.string.isRequired,
-};
+    thumb: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    language: PropTypes.string
+  };
+  

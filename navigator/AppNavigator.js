@@ -3,12 +3,14 @@ import { createStackNavigator } from 'react-navigation-stack';
 import Loading from '../screens/Loading';
 import Home from '../screens/HomeScreen';
 import ListRepos from '../screens/ListRepos';
+import RepoDetails from '../screens/Modal';
 
 const stackNavigation = createStackNavigator (
     {
         LoadingScreen: Loading,
         HomeScreen: Home,
-        ListReposScreen: ListRepos
+        ListReposScreen: ListRepos,
+        RepoDetailsScreen: RepoDetails
     },
     {
         initialRouteName: "LoadingScreen"
